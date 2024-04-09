@@ -1,0 +1,137 @@
+-> Classes and objects, in the context of this project (Sudoku solver):
+	-> For code modularity, abstraction and readability 
+	-> Python is an object-oriented language <- we are looking to promote reusability in the code 
+	-> In the context of this project:
+		-> We are using classes and objects to build a Sudoku grid 
+		-> To solve a Sudoku puzzle 
+
+-> Classes:
+	-> Classes are blueprints to creating objects
+	-> Objects are instances of the class
+	-> class ClassName: <- Syntax for class creation 
+	-> We are creating a 9x9 board with classes and then populating it with puzzle values 
+	-> Classes can have methods <- local functions for each instance
+		-> __init__ is called upon instantiation 
+		-> Syntax for defining this:
+
+class ClassName:
+    def method_name():
+        pass
+
+	-> The order of the parameters (arguments) we pass into the __init__ method matter
+		-> The `self` argument is a reference to the instance of the class 
+		-> The other arguments are specific to our current context 
+	-> self.board <- The board attribute of the instance of the class
+
+-> Then we are constructing the board out of a 9x9 grid 
+	-> The input puzzle to this:
+
+puzzle = [
+  [0, 0, 2, 0, 0, 8, 0, 0, 0],
+  [0, 0, 0, 0, 0, 3, 7, 6, 2],
+  [4, 3, 0, 0, 0, 0, 8, 0, 0],
+  [0, 5, 0, 0, 3, 0, 0, 9, 0],
+  [0, 4, 0, 0, 0, 0, 0, 2, 6],
+  [0, 0, 0, 4, 6, 7, 0, 0, 0],
+  [0, 8, 6, 7, 0, 4, 0, 0, 0],
+  [0, 0, 0, 5, 1, 9, 0, 0, 8],
+  [1, 7, 0, 0, 0, 6, 0, 0, 5]
+]
+
+	-> We are then creating different variables, to produce the appearance of the Sudoku board 
+-> The enumerate() function:
+	-> To take an iterable and return iterator that produces tuples containing indices and corresponding values from the iterable 
+	-> for x, y in enumerate(parameter): <- To iterate over the different rows in the Sudoku board 
+	-> This function is used multiple times throughout the code
+	-> Then joining different elements using the pipe (|) character
+	-> We are creating an if statement to check that the current segment is not the last one
+	-> Then creating string representations of the rows with spaces between each element 
+
+-> replace():
+	-> The arguments to this method are the characters to be replaced and the characters to replace them with 
+
+-> Creating a function which builds the Sudoku board:  
+	-> Checking if the row is the last one inside a 3x3 square for example
+	-> We are using nested if conditions to do this, and then doing so for different conditions in the game 
+	-> Setting different variables, to build the Sudoku board 
+		-> These contain its setup 
+	-> ASCII art style <- This is the style of the board we are creating 
+	-> Storing the representation of the Sudoku board in a variable called `board_string`
+		-> And then returning the value of this variable at the end of the function 
+		-> This prints the string 
+		-> We are returning row and column values 
+	-> except ValueError <- To return a value error if a value isn't found 
+
+-> Then we are encoding the rules of Sudoku onto the board:
+	-> Implementing error handling for this 
+	-> We are searching for empty cells in the board as part of this <- `None` implies that the board is filled 
+	-> Then defining another function to check if a number can be inserted into a specified row of the board 
+		-> We are encoding the rules of the game into their own functions 
+		-> The arguments of this are the instance of the class (self), the row index on the Sudoku board and the number we want to check 
+	-> Defining another method to check if a given number can be inserted into a row of a Sudoku board 
+	-> Then another expression to check if the number isn't present in a row
+	-> Depending on if there is a number at that section in the board or not, we are defining a boolean 
+		-> Then depending on the boolean, the section of the Sudoku board can take an input or not 
+		-> We also need to make sure that the values of those numbers are ones which the board can take (valid, between 1 and 9)
+
+	-> Then creating a method that checks if a number can be inserted into a given column of the board 
+		-> We are checking if the number is not already in the column for any row 
+		-> This is done in the `Board` class 
+	-> Then checking if a number is not equal to the number in the specified column of the current row 
+		-> And then running it for every element on the board 
+	-> Then passing generator expressions to functions
+		-> This is with the all() function 
+		-> We then return a function call for this, using return all()
+
+-> We then define another method, to check if a number can be inserted into a 3x3 square:
+	-> We first calculate the starting row indices for the 3x3 block in the board grid
+	-> Then making sure that the starting row indices are multiples of 3, using the modulo function 
+	-> Then calculating the starting column index for the 3x3 block in the board grid 
+		-> Making sure that each is a multiple of 3 
+	-> Then creating a for loop that starts at row_start and ends just before row_start + 3
+		-> range() <- This function can be used to generate the sequence
+		-> We are iterating over sequences of 3 (if you look at the architecture of a Sudoku board)
+	-> Then checking if the currently specified number is already present <- coding the rules of the game onto the board we just created 
+		-> These are the rules which specifically apply to 3x3 squares: 
+			-> Checking if a number is already present there 
+			-> And then in each of these cases returning False (for example), to indicate that the number can or cannot be inserted there 
+			-> We are doing this to make sure that the numbers can be inserted into the square without violating the rules of the game 
+	-> Then creating another method which takes three parameters, to validate numbers we can enter into the empty cells on the board 
+		-> The arguments for this are the current instance of the class (self), the row and column indices of an empty cell (empty) and num (the number to be checked)
+		-> We are checking if a number can go in a specific place on the board, by checking it in comparison to the numbers in its row, column and in the square which it occupies 
+			-> Checking each of these with separate if conditions 
+			-> To see if the number can be inserted into a square <- and then putting this in a 'True' / 'False' boolean variable 
+			-> Checking if the number is valid for insertion into the specified row <- then assigning the result of this to the variable 
+				-> Doing the same with its columns 
+				-> Verifying that all the function calls return true 
+
+-> Then creating methods which solve the sudoku board:
+	-> This is a method that attempts to solve the sudoku in-place
+	-> We are modifying the existing sudoku board, rather than creating a new one 
+	-> We check if there are any empty cells left on the board <- using the `find_empty_cell` function call on `self`
+	-> := <- This is the walrus operator, it assigns the value of one variable to another 
+	-> When we write code, the aim is to make it as concise as possible - and make it fit into as few lines as we can (to condense it)
+	-> And then establishing the conditions if this has worked <- The case that the puzzle has been passed -> returning True in a boolean 
+		-> Then another for the opposite case 
+	-> One technique is to create an else block to iterate over numbers 1-9 inclusive 
+	-> Using the `guess` variable <- we are checking if the number entered is a valid choice for the current empty cell 
+	-> If the guess is valid, we then update the board with it 
+	-> Then accessing the cell at the given row and column on the board, and assigning it with the value of `guess`
+	-> Once we have this function, the self.solver() function, we want call t repeatedly (recursively) to try and solve the rest of the puzzle  
+		-> If the outcome to this is True, then the puzzle is solved 
+		-> If this returns False, then the puzzle is not solvable 
+		-> Depending on if the guesses lead to a solution 
+	-> We can pass different baords into the function, for it to solve 
+
+-> Then we are writing another function which prints and solves the sudoku board: 
+	-> This is the `solve_sudoku` function 
+	-> The parameter that this function takes is the 2D list which represents the board 
+	-> Inside this function, we are creating a `gameboard` variable and assigning it an instance of the Board class 
+	-> We are passing `Board` as the argument for this, to initialise the sudoku board with the given initial state 
+	-> Then we add another print call to print the game board 
+	-> Adding a print block to check that passes the game board as the argument to this 
+	-> Then we are creating an if statement that checks if the solver() method call from the game board returns True 
+		-> Adding a print() call inside the if block, passing a string into this 
+	-> Adding multiple print statements, to print the current state of the board 
+	-> Then returning the state of the board class after this is complete 
+	-> Testing the function after it's been defined <- it inputs the representation of a sudoku board, and solves it 
