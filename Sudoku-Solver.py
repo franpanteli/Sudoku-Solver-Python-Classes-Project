@@ -1,6 +1,47 @@
+"""
+	-> We are writing a Sudoku solver 
+	-> This entire solver is enclosed in its own class 
+	-> We have multiple definitions / methods defined as part of this class
+	-> And then right at the end of the .py file, this class is tested by calling the `solve_sudoku` method 
+	-> So we are first defining the class for the solver 
+"""
+
 class Board:
+
+"""
+	-> The Board Class:
+		-> This represents the Sudoku game board 
+		-> We have methods defined as part of this, to initialise the Sudoku board and display it as a string 
+		-> There are other methods set up for this class:
+			-> To find an empty cell on the board
+			-> To check if a number is valid in a certain row
+			-> To check if a number is valid to be placed on the ground
+			-> To solve the puzzle recursively, by using backtracking 
+"""
+
     def __init__(self, board):
         self.board = board
+
+"""
+    Defining methods as part of this: 
+        -> The `__init__` method <- This initialises the `Board` object with a given board configuration 
+        -> The `__str__ ` method <- We are drawing a grid for the Sudoku board, created out of strings. This method 
+            generates the representation of this 
+        -> The `find_empty_cell` method <- This iterates through the Sudoku board and returns the coordinates of an 
+            empty cell which we want to populate
+
+        -> We are then defining methods which encode the Sudoku rules onto the board: 
+            -> We are checking that the numbers which we want to enter into the board are valid 
+            -> There are three methods to do this, which are `valid_in_row`, `valid_in_col`, and `valid_in_square`
+            -> To make sure that we can place the number we are trying to enter into a column, row or square in the grid 
+
+        -> We then define a method (`is_valid`), to check that a number can be placed inside a cell on the grid 
+            -> We can't have numbers repeated in the same row, column or square <- this method encodes this
+            
+        -> The final method defined as part of this solves the Sudoku puzzle, by recursively attempting to enter numbers 
+            1-9 in different cells on the board and seeing if these are valid placements or not
+            -> This is done with the `solver` method  and uses backtracking  
+"""
 
     def __str__(self):
         upper_lines = f'\n╔═══{"╤═══"*2}{"╦═══"}{"╤═══"*2}{"╦═══"}{"╤═══"*2}╗\n'
@@ -76,6 +117,24 @@ class Board:
                     self.board[row][col] = 0
 
         return False
+
+"""
+    We then define the `solve_sudoku` function:
+        -> This creates a `Board` object, to create a Sudoku board out of the given numbers 
+        -> Then printing this initial puzzle, attempting to solve it and printing out the solution if we find one
+
+    Then defining `puzzle`:
+        -> This defines the Sudoku puzzle as a list of lists
+        -> Each of these inner lists represents a row of the board 
+
+    Testing the function:
+        -> We are then calling the `solve_sudoku` function, with the input puzzle
+        -> This solves the function with a brute force approach 
+        -> We are trying different numbers in empty cells again and again until something words, according to the 
+            Sudoku rules we have coded 
+        -> It this brute force approach doesn't work, then we are concluding that the puzzle which has been input into 
+            the function can't be solved
+"""
 
 def solve_sudoku(board):
     gameboard = Board(board)
