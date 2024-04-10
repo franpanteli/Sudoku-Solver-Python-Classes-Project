@@ -105,9 +105,9 @@ puzzle = [
 				-> Doing the same with its columns 
 				-> Verifying that all the function calls return true 
 
--> Then creating methods which solve the sudoku board:
-	-> This is a method that attempts to solve the sudoku in-place
-	-> We are modifying the existing sudoku board, rather than creating a new one 
+-> Then creating methods which solve the Sudoku board:
+	-> This is a method that attempts to solve the Sudoku in-place
+	-> We are modifying the existing Sudoku board, rather than creating a new one 
 	-> We check if there are any empty cells left on the board <- using the `find_empty_cell` function call on `self`
 	-> := <- This is the walrus operator, it assigns the value of one variable to another 
 	-> When we write code, the aim is to make it as concise as possible - and make it fit into as few lines as we can (to condense it)
@@ -123,15 +123,15 @@ puzzle = [
 		-> Depending on if the guesses lead to a solution 
 	-> We can pass different baords into the function, for it to solve 
 
--> Then we are writing another function which prints and solves the sudoku board: 
+-> Then we are writing another function which prints and solves the Sudoku board: 
 	-> This is the `solve_sudoku` function 
 	-> The parameter that this function takes is the 2D list which represents the board 
 	-> Inside this function, we are creating a `gameboard` variable and assigning it an instance of the Board class 
-	-> We are passing `Board` as the argument for this, to initialise the sudoku board with the given initial state 
+	-> We are passing `Board` as the argument for this, to initialise the Sudoku board with the given initial state 
 	-> Then we add another print call to print the game board 
 	-> Adding a print block to check that passes the game board as the argument to this 
 	-> Then we are creating an if statement that checks if the solver() method call from the game board returns True 
 		-> Adding a print() call inside the if block, passing a string into this 
 	-> Adding multiple print statements, to print the current state of the board 
 	-> Then returning the state of the board class after this is complete 
-	-> Testing the function after it's been defined <- it inputs the representation of a sudoku board, and solves it 
+	-> Testing the function after it's been defined <- it inputs the representation of a Sudoku board, and solves it 
