@@ -4,5 +4,5 @@ I independently completed freeCodeCamp’s [Scientific Computing with Python](ht
 
 ### To Clone This Repository
 ```
-git clone https://github.com/franpanteli/Sudoku-Solver-Python-Classes-Project-.git
+git clone https://github.com/franpanteli/Sudoku-Solver-Python-Classes-Project.git
 ```
